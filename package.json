@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/pattern-lab/styleguidekit-assets-default",
   "devDependencies": {
+    "browser-sync": "^2.18.13",
     "del": "^1.1.1",
     "gulp": "^3.8.6",
     "gulp-autoprefixer": "^2.1",

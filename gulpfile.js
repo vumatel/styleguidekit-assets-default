@@ -9,6 +9,7 @@ var gulpLoadPlugins    = require('gulp-load-plugins');
 var plugins            = gulpLoadPlugins({ scope: ['devDependencies'] });
 plugins.del            = require("del");
 plugins.mainBowerFiles = require("main-bower-files");
+var browserSync = require('browser-sync').create();
 
 function copyPublic(suffix) {
 	if (args['copy-dist'] !== undefined) {
@@ -125,6 +126,15 @@ gulp.task('build:js-pattern', ['build:js-viewer'], function() {
 		.pipe(copyPublic("styleguide/js"));
 });
 
+// Static server
+gulp.task('browser-sync', function() {
+    browserSync.init({
+        server: {
+            baseDir: "./dist"
+        }
+    });
+});
+
 gulp.task('default', ['build:bower', 'build:css-patternlab', 'build:html', 'build:js-pattern'], function () {
 	if (args.watch !== undefined) {
 		gulp.watch(['src/bower_components/**/*'], ['build:bower']);
@@ -133,5 +143,5 @@ gulp.task('default', ['build:bower', 'build:css-patternlab', 'build:html', 'buil
 		gulp.watch(['src/html/*'], ['build:html']);
 		gulp.watch(['src/js/*'], ['build:js-pattern']);
 	}
-	
+
 });
